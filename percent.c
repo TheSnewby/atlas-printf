@@ -10,9 +10,14 @@
 int percent_cs(char c, char *arg) /* combined to make room for more functions */
 {
     int i;
+	char *str;
 
     if (c == '\0' && arg == NULL)
-        return (0);
+	{
+		str = "(null)";
+		write(1, str, 6);
+        return (6);
+	}
     else if (arg != NULL) /* print string */
     {
         for (i = 0; arg[i] != '\0'; i++)
