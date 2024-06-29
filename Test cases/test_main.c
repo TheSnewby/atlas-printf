@@ -6,7 +6,7 @@
  *
  * Return: Always 0
  */
-/*
+
 int main(void)
 {
 	int printed = 0;
@@ -15,7 +15,6 @@ int main(void)
   printf("%d\n", printed);
   return 0;
 
-    /*
 	int len;
     int len2;
     unsigned int ui;
@@ -50,4 +49,3 @@ int main(void)
     return (0);
 
 }
-*/

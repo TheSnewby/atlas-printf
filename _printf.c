@@ -29,10 +29,12 @@ int _printf(const char *format, ...)
     else if (format[i] == '%' && (format[i + 1] == 'c'))
     {
 		print_count += percent_cs((char)va_arg(identifiers, int), NULL);
+		i++;
     }
     else if (format[i] == '%' && (format[i + 1] == 's'))
     {
 		print_count += percent_cs('\0', va_arg(identifiers, char *));
+		i++;
     }
     else if (format[i] == '%' && (format[i + 1] == 'i'))
     {
@@ -45,6 +47,7 @@ int _printf(const char *format, ...)
           print_count++;
       }
        percent_i(original_i);
+	   i++;
     }
     else if (format[i] == '%' && (format[i + 1] == 'd'))
     {
@@ -59,10 +62,15 @@ int _printf(const char *format, ...)
       {
           copy_d = copy_d / 10;
           print_count++;
-      }
+	}
        percent_d(original_d * -1);
+	i++;
     }
-    i++;
+	else
+	{
+		write(1, &format[i], 1);
+		print_count++;
+	}
   }
   va_end(identifiers);
   return (print_count);
