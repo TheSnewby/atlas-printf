@@ -68,6 +68,8 @@ int _printf(const char *format, ...)
     }
 	else
 	{
+		if (format[i] == '%' && format[i + 1] != '%')
+			continue;
 		write(1, &format[i], 1);
 		print_count++;
 	}
