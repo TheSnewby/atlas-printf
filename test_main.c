@@ -9,7 +9,14 @@
  */
 int main(void)
 {
-    int len;
+	int printed = 0;
+  
+  printed = _printf("%s%i%c%d","milk", 42,'H', -42); 
+  printf("%d\n", printed);
+  return 0;
+
+    /*
+	int len;
     int len2;
     unsigned int ui;
     void *addr;
@@ -41,4 +48,5 @@ int main(void)
     _printf("Unknown:[%r]\n");
     printf("Unknown:[%r]\n");
     return (0);
+	*/
 }
