@@ -39,6 +39,7 @@ int percent_cs(char c, char *arg, int choice) /* combined to make room for more 
             return (i);
         }
     }
+	return (0);
 }
 
 /**
