@@ -7,7 +7,7 @@
 #include <unistd.h>
 
 int _printf(const char *, ...);
-int percent_cs(char c, char *arg);
+int percent_cs(char, char *, int);
 void percent_d(int);
 void percent_i(unsigned int);
 
