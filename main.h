@@ -8,7 +8,8 @@
 
 int _printf(const char *, ...);
 int percent_cs(char, char *, int);
-void percent_d(int);
-void percent_i(unsigned int);
+int percent_d(int);
+int percent_i(unsigned int);
+void print_percent_di(int d, unsigned int i, int choice);
 
 #endif
