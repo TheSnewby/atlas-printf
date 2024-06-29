@@ -63,7 +63,7 @@ int _printf(const char *format, ...)
           copy_d = copy_d / 10;
           print_count++;
 	}
-       percent_d(original_d * -1);
+       percent_d(original_d);
 	i++;
     }
 	else
