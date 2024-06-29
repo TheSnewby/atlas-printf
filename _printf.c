@@ -14,23 +14,25 @@ int _printf(const char *format, ...)
   unsigned int copy_i;
   int original_d;
   int copy_d;
+  char c;
   
   va_start(identifiers, format);
   for (i = 0; format[i] != '\0'; i++)
   {
     if (format[i] == '%' && format [i + 1] == '%')
     {
-      write(1, '%', 1);
-      print_count += 1;
-      i++;
+		c = '%';
+		write(1, &c, 1);
+		print_count += 1;
+ 		i++;
     }
     else if (format[i] == '%' && (format[i + 1] == 'c'))
     {
-      print_count += percent_cs((char)va_arg(identifiers, int), '\0');
+		print_count += percent_cs((char)va_arg(identifiers, int), NULL);
     }
     else if (format[i] == '%' && (format[i + 1] == 's'))
     {
-      print_count += percent_cs(NULL, va_arg(identifiers, char *));
+		print_count += percent_cs('\0', va_arg(identifiers, char *));
     }
     else if (format[i] == '%' && (format[i + 1] == 'i'))
     {
