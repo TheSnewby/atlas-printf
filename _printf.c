@@ -28,12 +28,12 @@ int _printf(const char *format, ...)
     }
     else if (format[i] == '%' && (format[i + 1] == 'c'))
     {
-		print_count += percent_cs((char)va_arg(identifiers, int), NULL);
+		print_count += percent_cs((char)va_arg(identifiers, int), NULL, 0);
 		i++;
     }
     else if (format[i] == '%' && (format[i + 1] == 's'))
     {
-		print_count += percent_cs('\0', va_arg(identifiers, char *));
+		print_count += percent_cs('\0', va_arg(identifiers, char *), 1);
 		i++;
     }
     else if (format[i] == '%' && (format[i + 1] == 'i'))

@@ -7,29 +7,31 @@
  *
  * Return: number of characters printed
  */
-int percent_cs(char c, char *arg) /* combined to make room for more functions */
+int percent_cs(char c, char *arg, int choice) /* combined to make room for more functions */
 {
     int i;
-	char *str;
-
-    if (c == '\0' && arg == NULL)
-	{
-		str = "(null)";
-		write(1, str, 6);
-        return (6);
-	}
-    else if (arg != NULL) /* print string */
+    char *cs; /* placeholder for misc. prints */
+    if (choice == 1) /* print string */
     {
-        for (i = 0; arg[i] != '\0'; i++)
-            ;
-        write(1, arg, i);
-        return (i);
+        if (arg == NULL)/* null string */
+        {
+            cs = "(null)";
+            write(1, cs, 6);
+            return (6);
+        }
+        else /* regular string */
+        {
+            for (i = 0; arg[i] != '\0'; i++)
+                ;
+            write(1, arg, i);
+            return (i);
+        }
     }
-    else if (c != '\0') /* print char */
-    {
-        write(1,&c,1);
+    else{ /* print char */
+        if (c != '\0') 
+            write(1,&c,1);
         return(1);
-    }
+        }
     return (0);
 }
 
