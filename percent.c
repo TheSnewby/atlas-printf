@@ -35,7 +35,7 @@ int percent_cs(char c, char *arg, int choice) /* combined to make room for more 
 		}      
 		else if (c == '\0')
 		{
-			cs = '\n';
+			cs = "\n";
 			write(1, &cs, 1);
 			return (1);
 		}
