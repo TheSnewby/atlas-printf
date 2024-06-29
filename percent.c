@@ -11,7 +11,21 @@ int percent_cs(char c, char *arg, int choice) /* combined to make room for more 
 {
     int i;
     char *cs; /* placeholder for misc. prints */
-    if (choice == 1) /* print string */
+    
+    if (choice == 0) /* print char */
+	{ 
+        if (c != '\0') 
+        {    write(1,&c,1);
+        	return(1);
+		}      
+		else if (c == '\0')
+		{
+			cs = "\n";
+			write(1, cs, 1);
+			return (1);
+		}
+	}
+	else /* print string */
     {
         if (arg == NULL)/* null string */
         {
@@ -27,18 +41,6 @@ int percent_cs(char c, char *arg, int choice) /* combined to make room for more 
             return (i);
         }
     }
-    else /* print char */
-	{ 
-        if (c != '\0') 
-        {    write(1,&c,1);
-        	return(1);
-		}      
-		else if (c == '\0')
-		{
-			cs = "\n";
-			write(1, cs, 1);
-			return (1);
-		}
     return (0);
 }
 
