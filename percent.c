@@ -4,6 +4,7 @@
  * percent_cs - prints characters and strings
  * @c: individual character
  * @s: string
+ * @choice: int, 0 if char, 1 if string
  *
  * Return: number of characters printed
  */
@@ -15,8 +16,8 @@ int percent_cs(char c, char *arg, int choice) /* combined to make room for more 
     if (choice == 0) /* print char */
 	{ 
         if (c != '\0') 
-        {    write(1,&c,1);
-        	return(1);
+        {    write(1, &c, 1);
+        	return (1);
 		}
 		else if (c == '\0')
 		{
@@ -45,8 +46,7 @@ int percent_cs(char c, char *arg, int choice) /* combined to make room for more 
 		write(1, cs, 1);
 		return(1);
 	}
-	else
-		return (0);
+	return (0);
 }
 /**
  * print_percent_di - recursively prints a number depending on inputs

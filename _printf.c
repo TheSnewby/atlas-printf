@@ -10,7 +10,6 @@ int _printf(const char *format, ...)
   va_list identifiers;
   int i;
   int print_count = 0;
-  char c;
 
   va_start(identifiers, format);
   for (i = 0; format[i] != '\0'; i++)
@@ -21,17 +20,17 @@ int _printf(const char *format, ...)
 			print_count += percent_cs(format[i + 1], NULL, 0);
  		else if (format[i + 1] == 'c')
 			print_count += percent_cs((char)va_arg(identifiers, int), NULL, 0);
-    	else if (format[i + 1] == 's')
+		else if (format[i + 1] == 's')
 			print_count += percent_cs('\0', va_arg(identifiers, char *), 1);
 		else if (format[i + 1] == 'i')
-  		    print_count += percent_i(va_arg(identifiers, unsigned int));
-    	else if (format[i + 1] == 'd')
-     		print_count += percent_d(va_arg(identifiers, int));
-		if (format[i + 1] == '%' || format[i + 1] == 'c' || format[i + 1] == 's'
-		|| format[i + 1] == 'd' || format[i + 1] == 'i')
-			i++;
+			print_count += percent_i(va_arg(identifiers, unsigned int));
+		else if (format[i + 1] == 'd')
+			print_count += percent_d(va_arg(identifiers, int));
 	}
-	else
+	if ( format[i] == '%' && (format[i + 1] == '%' || format[i + 1] == 'c' || format[i + 1] == 's'
+		|| format[i + 1] == 'd' || format[i + 1] == 'i'))
+			i++;
+	else if (format[i] != '%')
 	{
 		write(1, &format[i], 1);
 		print_count++;
