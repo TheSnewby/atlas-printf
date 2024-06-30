@@ -15,15 +15,8 @@ int percent_cs(char c, char *arg, int choice)
 
 	if (choice == 0) /* print char */
 	{
-		if (c != '\0')
-		{
-			write(1, &c, 1);
-			return (1);
-		}
-		else if (c == '\0')
-		{
-			return (0);
-		}
+		write(1, &c, 1);
+		return (1);
 	}
 	else if (choice == 1) /* print string */
 	{
