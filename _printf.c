@@ -29,6 +29,8 @@ int _printf(const char *format, ...)
 			if (format[i + 1] == '%' || format[i + 1] == 'c' ||
 			format[i + 1] == 's' || format[i + 1] == 'd' || format[i + 1] == 'i')
 				i++;
+			else /* case for % not followed by specificier */
+				continue;
 		}
 		else
 		{
