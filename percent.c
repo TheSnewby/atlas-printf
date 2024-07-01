@@ -3,7 +3,7 @@
 /**
  * percent_cs - prints characters and strings
  * @c: individual character
- * @s: string
+ * @arg: string
  * @choice: int, 0 if char, 1 if string
  *
  * Return: number of characters printed
