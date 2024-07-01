@@ -31,6 +31,11 @@ int _printf(const char *format, ...)
 				i++;
 			else if (format[i + 1] == '\0') /* case for % not followed by specificier */
 				return (-1);
+			else
+			{
+				write(1, &format[i], 1);
+				print_count++;
+			}
 		}
 		else
 		{
