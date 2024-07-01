@@ -23,7 +23,7 @@ int _printf(const char *format, ...)
 			else if (format[i + 1] == 's')
 				print_count += percent_cs('\0', va_arg(identifiers, char *), 1);
 			else if (format[i + 1] == 'i')
-				print_count += percent_i(va_arg(identifiers, unsigned int));
+				print_count += percent_i(va_arg(identifiers, int));
 			else if (format[i + 1] == 'd')
 				print_count += percent_d(va_arg(identifiers, int));
 			if (format[i + 1] == '%' || format[i + 1] == 'c' ||

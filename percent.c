@@ -50,7 +50,7 @@ int percent_cs(char c, char *arg, int choice)
  *
  * Return: void
  */
-void print_percent_di(int d, unsigned int i, int choice)
+void print_percent_di(int d, int i, int choice)
 {
 	char c;
 
@@ -69,35 +69,62 @@ void print_percent_di(int d, unsigned int i, int choice)
 	}
 	else
 	{
+		if (i < 0)
+		{
+			c = '-';
+			write(1, &c, 1);
+			i *= -1;
+		}
 		if (i >= 10)
-			print_percent_di(0, i / 10, 1);
+			print_percent_di(0, i / 10, 0);
 		c = i % 10 + '0';
 		write(1, &c, 1);
 	}
 }
 /**
  * percent_i - handles %i
- * @i: unsigned int
+ * @i: integer
  *
  * Return: int, number of chars printed
  */
-int percent_i(unsigned int i)
+int percent_i(int i)
 {
-	unsigned int copy_i = i;
+	int copy_i = i;
 	int print_count = 0;
+	char c;
 
+	if (copy_i == INT_MIN)
+	{
+		copy_i = copy_i / 10;
+		print_count++;
+	}
+	if (copy_i < 0)
+	{
+		copy_i *= -1;
+		print_count++;
+	}
+	else if (copy_i == 0)
+		print_count++;
 	while (copy_i > 0)
 	{
 		copy_i = copy_i / 10;
 		print_count++;
 	}
-		print_percent_di(0, i, 1);
+	if (i != INT_MIN)
+		print_percent_di(i, 0, 0);
+	else
+	{
+		print_percent_di(i / 10, 0, 0);
+		c = 8 + '0'; /* hard-coding the first digit of INT_MIN */
+		write(1, &c, 1);
+	}
+
 	return (print_count);
 }
 
 /**
  * percent_d - handles %d
- * @d: int
+ * @d: decimal
  *
  * Return: int, number of chars printed
  */
