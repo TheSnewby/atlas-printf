@@ -63,14 +63,14 @@ void print_percent_di(int d, unsigned int i, int choice)
 			d *= -1;
 		}
 		if (d >= 10)
-			percent_d(d / 10);
+			print_percent_di(d / 10, 0, 0);
 		c = d % 10 + '0';
 		write(1, &c, 1);
 	}
 	else
 	{
 		if (i >= 10)
-			percent_i(i / 10);
+			print_percent_di(0, i / 10, 1);
 		c = i % 10 + '0';
 		write(1, &c, 1);
 	}
@@ -105,18 +105,33 @@ int percent_d(int d)
 {
 	int copy_d = d;
 	int print_count = 0;
+	char c;
 
+	if (copy_d == INT_MIN)
+	{
+		copy_d = copy_d / 10;
+		print_count++;
+	}
 	if (copy_d < 0)
 	{
 		copy_d *= -1;
 		print_count++;
 	}
+	else if (copy_d == 0)
+		print_count++;
 	while (copy_d > 0)
 	{
 		copy_d = copy_d / 10;
 		print_count++;
 	}
-	print_percent_di(d, 0, 0);
+	if (d != INT_MIN)
+		print_percent_di(d, 0, 0);
+	else
+	{
+		print_percent_di(d / 10, 0, 0);
+		c = 8 + '0'; /* hard-coding the first digit of INT_MIN */
+		write(1, &c, 1);
+	}
 
 	return (print_count);
 }
