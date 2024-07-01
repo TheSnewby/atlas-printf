@@ -30,7 +30,9 @@ int _printf(const char *format, ...)
 			format[i + 1] == 's' || format[i + 1] == 'd' || format[i + 1] == 'i')
 				i++;
 			else if (format[i + 1] == '\0') /* case for % not followed by specificier */
+			{
 				return (-1);
+			}
 			else
 			{
 				write(1, &format[i], 1);
