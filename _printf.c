@@ -7,14 +7,14 @@
  */
 int _printf(const char *format, ...)
 {
-	va_list identifiers;
-	int i;
-	int print_count = 0;
+	va_list identifiers; /* create empty list */
+	int i; /* index var */
+	int print_count = 0; /* # of chars to be printed */
 
-	va_start(identifiers, format);
-	for (i = 0; format[i] != '\0'; i++)
+	va_start(identifiers, format); /* initialize list with values after format */
+	for (i = 0; format[i] != '\0'; i++) /* iterate through format until end */
 	{
-		if (format[i] == '%')
+		if (format[i] == '%') /* special char */
 		{
 			if (format[i + 1] == '%')
 				print_count += percent_cs(format[i + 1], NULL, 0);
@@ -31,20 +31,20 @@ int _printf(const char *format, ...)
 				i++;
 			else if (format[i + 1] == '\0') /* case for % not followed by specificier */
 			{
-				return (-1);
+				return (-1); /* error */
 			}
 			else
 			{
-				write(1, &format[i], 1);
+				write(1, &format[i], 1); /* print '%' character if allowed */
 				print_count++;
 			}
 		}
 		else
 		{
-			write(1, &format[i], 1);
+			write(1, &format[i], 1); /* print allowed characters */
 			print_count++;
 		}
 	}
-	va_end(identifiers);
-	return (print_count);
+	va_end(identifiers); /* end list */
+	return (print_count); /* return number of chars printed */
 }

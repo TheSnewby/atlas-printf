@@ -28,7 +28,7 @@ int percent_cs(char c, char *arg, int choice)
 		}
 		else /* regular string */
 		{
-			for (i = 0; arg[i] != '\0'; i++)
+			for (i = 0; arg[i] != '\0'; i++) /* find length of string */
 				;
 			write(1, arg, i);
 				return (i);
@@ -36,7 +36,7 @@ int percent_cs(char c, char *arg, int choice)
 	}
 	else if (c == '%')
 	{
-		cs = "%";
+		cs = "%"; /* print a % if %% */
 		write(1, cs, 1);
 		return (1);
 	}
@@ -50,34 +50,34 @@ int percent_cs(char c, char *arg, int choice)
  *
  * Return: void
  */
-void print_percent_di(int d, int i, int choice)
+void print_percent_di(int d, int i, int choice) /* reduceable to one param */
 {
 	char c;
 
-	if (choice == 0)
+	if (choice == 0) /* %d case, can be combined with %i */
 	{
-		if (d < 0)
+		if (d < 0) /* change sign, print '-' */
 		{
 			c = '-';
 			write(1, &c, 1);
 			d *= -1;
 		}
-		if (d >= 10)
+		if (d >= 10) /* recursively call until a single digit */
 			print_percent_di(d / 10, 0, 0);
-		c = d % 10 + '0';
+		c = d % 10 + '0'; /* ones-digit assigned to character */
 		write(1, &c, 1);
 	}
-	else
+	else /* %i case , can be combined with %d */
 	{
-		if (i < 0)
+		if (i < 0) /* change sign, print '-' */
 		{
 			c = '-';
 			write(1, &c, 1);
 			i *= -1;
 		}
-		if (i >= 10)
+		if (i >= 10) /* recursively call until a single digit */
 			print_percent_di(0, i / 10, 0);
-		c = i % 10 + '0';
+		c = i % 10 + '0'; /* ones-digit assigned to character */
 		write(1, &c, 1);
 	}
 }
@@ -89,33 +89,33 @@ void print_percent_di(int d, int i, int choice)
  */
 int percent_i(int i)
 {
-	int copy_i = i;
-	int print_count = 0;
-	char c;
+	int copy_i = i; /* used in finding size of i to be printed */
+	int print_count = 0; /* number of chars to be printed */
+	char c; /* useful for printing individual chars */
 
-	if (copy_i == INT_MIN)
+	if (copy_i == INT_MIN) /* INT_MIN case */
 	{
 		copy_i = copy_i / 10;
 		print_count++;
 	}
-	if (copy_i < 0)
+	if (copy_i < 0) /* remove negative while adding print counter */
 	{
 		copy_i *= -1;
 		print_count++;
 	}
-	else if (copy_i == 0)
+	else if (copy_i == 0) /* makes sure 0 is counted */
 		print_count++;
-	while (copy_i > 0)
+	while (copy_i > 0) /* finds remaining values to be printed */
 	{
 		copy_i = copy_i / 10;
 		print_count++;
 	}
-	if (i != INT_MIN)
+	if (i != INT_MIN) /* print non-INT_MIN cases */
 		print_percent_di(i, 0, 0);
 	else
 	{
-		print_percent_di(i / 10, 0, 0);
-		c = 8 + '0'; /* hard-coding the first digit of INT_MIN */
+		print_percent_di(i / 10, 0, 0); /* print INT_MIN case */
+		c = 8 + '0'; /* hard-coding the first ones-digit of INT_MIN */
 		write(1, &c, 1);
 	}
 
@@ -128,9 +128,9 @@ int percent_i(int i)
  *
  * Return: int, number of chars printed
  */
-int percent_d(int d)
+int percent_d(int d) /* consider combining with percent_i */
 {
-	int copy_d = d;
+	int copy_d = d; /* same notes as for percent_i */
 	int print_count = 0;
 	char c;
 
