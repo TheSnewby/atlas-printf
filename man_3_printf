@@ -1,1 +1,17 @@
-in the works
+./" _printf
+.TH _printf (3)
+.SH NAME
+_printf - prints a formatted string with limited functionality
+.SH SYNOPSIS
+.B _printf
+(\fIformatted string, ... [\fB%c\fR] [\fB%s\fR] [\fB%d\fR] [\f%i\fR])
+.SH DESCRIPTION
+.B _printf
+prints a formatted string by using % to flag for c (char), s (string), d (decimal), i (integer).
+Any occurence of these flags is parred with a passed variadic argument to be handled specially.
+.IP "\fBreturns\fR"
+the number of characters printed, or -1 if an error occurred.
+.SH FUTURE IMPROVEMENTS
+Several functions can be refactored due to suprising redudancy of %d and %i in printf.
+.SH AUTHORS
+Stephen Newby & Ari Taylor
